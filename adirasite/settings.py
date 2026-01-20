@@ -30,7 +30,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*'] #for allowing all hosts during development
 
-
 # Application definition
 
 INSTALLED_APPS = [

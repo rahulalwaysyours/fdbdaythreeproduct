@@ -11,6 +11,7 @@ class Product(models.Model):
     updated_at = models.DateTimeField(auto_now=True) #when existing rows updated
     on_sale = models.BooleanField(default = False)
 
+
     #methods
     @property
     def tax(self):
