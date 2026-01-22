@@ -16,6 +16,8 @@ Including another URLconf
 """
 from django.urls import include, path
 from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
 from products.views import home, contact
 
 # from .views import about, index
@@ -29,3 +31,8 @@ urlpatterns = [
     path('api/', include('products.urls')),
     path('api/auth/', include('accounts.urls')),
 ]
+
+# Serve media and static files in development
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
