@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 # import os
+from datetime import timedelta
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -43,7 +44,8 @@ INSTALLED_APPS = [
     'rest_framework',
 
     #local app registering
-    'products'
+    'products',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -118,6 +120,8 @@ USE_I18N = True
 USE_TZ = True
 
 
+AUTH_USER_MODEL = 'accounts.User'  # Custom user model
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
@@ -128,3 +132,21 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10
 }
+
+SIMPLE_JWT = {
+    #timedelta needs to be imported, and it provides time duration representation
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15), #access token valid for 15 minutes
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),    #refresh token valid for 1 day
+    'ROTATE_REFRESH_TOKENS': False, #whether to issue a new refresh token when the old one is used
+    'BLACKLIST_AFTER_ROTATION': True, #whether to blacklist old refresh tokens after rotation
+}
+
+EMAIL_BACKED = 'django.core.mail.backends.console.EmailBackend' #for development, prints emails to console
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'k.rahulalwaysyours@gmail.com'
+EMAIL_HOST_PASSWORD = 'sveeresyttsephhv'
+DEFAULT_FROM_EMAIL = 'k.rahulalwaysyours@gmail.com'
+
+BACKEND_URL = 'http://localhost:8000'  #for constructing verification link in email

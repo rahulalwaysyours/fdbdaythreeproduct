@@ -27,3 +27,4 @@ class ProductRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView)
     queryset = Product.objects.all()
     # we will reuse the same serializer
     serializer_class = ProductSerializer
+
